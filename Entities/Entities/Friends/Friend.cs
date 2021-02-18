@@ -1,4 +1,6 @@
-﻿namespace Entities.Friends
+﻿using System.Drawing;
+
+namespace Entities.Friends
 {
     // Model class
     public class Friend
@@ -7,6 +9,6 @@
         public string Name { get; set; }
 
         //[Required]
-        //public IPoint Location { get; set; }
+        public Point Location { get; set; }
     }
 }
