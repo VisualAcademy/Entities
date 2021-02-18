@@ -1,0 +1,6 @@
+﻿CREATE TABLE [Book] (
+    [Id] int NOT NULL IDENTITY,
+    [Title] nvarchar(max) NULL,
+    [Isbn] varchar(22) NULL,
+    CONSTRAINT [PK_Book] PRIMARY KEY ([Id]));
+
