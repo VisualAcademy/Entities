@@ -1,0 +1,3 @@
+﻿SELECT TOP(2) [u].[Id], [u].[Name]
+FROM [Users] AS [u]
+WHERE [u].[Name] COLLATE French_CI_AS = N'RedPlus'

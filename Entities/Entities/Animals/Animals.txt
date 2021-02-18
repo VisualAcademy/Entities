@@ -1,0 +1,48 @@
+﻿CREATE TABLE [Animals] (
+    [Id] int NOT NULL IDENTITY,
+    [Species] nvarchar(max) NULL,
+    [Discriminator] nvarchar(max) NOT NULL,
+    [Name] nvarchar(max) NULL,
+    [EdcuationLevel] nvarchar(max) NULL,
+    [FavoriteToy] nvarchar(max) NULL,
+    CONSTRAINT [PK_Animals] PRIMARY KEY ([Id])
+);
+
+
+CREATE TABLE [Animals] (
+    [Id] int NOT NULL IDENTITY,
+    [Species] nvarchar(max) NULL,
+    CONSTRAINT [PK_Animals] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [Pets] (
+    [Id] int NOT NULL,
+    [Name] nvarchar(max) NULL,
+    CONSTRAINT [PK_Pets] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Pets_Animals_Id] FOREIGN KEY ([Id]) REFERENCES [Animals] ([Id]) ON DELETE NO ACTION
+);
+
+CREATE TABLE [Cats] (
+    [Id] int NOT NULL,
+    [EdcuationLevel] nvarchar(max) NULL,
+    CONSTRAINT [PK_Cats] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Cats_Animals_Id] FOREIGN KEY ([Id]) REFERENCES [Animals] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Cats_Pets_Id] FOREIGN KEY ([Id]) REFERENCES [Pets] ([Id]) ON DELETE NO ACTION
+);
+
+CREATE TABLE [Dogs] (
+    [Id] int NOT NULL,
+    [FavoriteToy] nvarchar(max) NULL,
+    CONSTRAINT [PK_Dogs] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Dogs_Animals_Id] FOREIGN KEY ([Id]) REFERENCES [Animals] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Dogs_Pets_Id] FOREIGN KEY ([Id]) REFERENCES [Pets] ([Id]) ON DELETE NO ACTION
+);
+
+
+SELECT [a].[Id], [a].[Discriminator], [a].[Name]
+FROM [Animal] AS [a]
+WHERE [a].[Discriminator] IN (N'Animal', N'Cat', N'Dog', N'Human')
+
+
+SELECT [a].[Id], [a].[Discriminator], [a].[Name]
+FROM [Animal] AS [a]
