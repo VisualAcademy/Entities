@@ -1,0 +1,21 @@
+﻿CREATE TABLE [Posts] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    CONSTRAINT [PK_Posts] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [Tag] (
+    [Id] int NOT NULL IDENTITY,
+    [Text] nvarchar(max) NULL,
+    CONSTRAINT [PK_Tag] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [PostTag] (
+    [PostsId] int NOT NULL,
+    [TagsId] int NOT NULL,
+    CONSTRAINT [PK_PostTag] PRIMARY KEY ([PostsId], [TagsId]),
+    CONSTRAINT [FK_PostTag_Posts_PostsId] FOREIGN KEY ([PostsId]) REFERENCES [Posts] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_PostTag_Tag_TagsId] FOREIGN KEY ([TagsId]) REFERENCES [Tag] ([Id]) ON DELETE CASCADE
+);
+
+CREATE INDEX [IX_PostTag_TagsId] ON [PostTag] ([TagsId]);

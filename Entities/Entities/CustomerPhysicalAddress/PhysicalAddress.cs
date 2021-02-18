@@ -3,6 +3,6 @@
     public class PhysicalAddress
     {
         public string StreetAddress { get; set; }
-        public Location Location { get; set; }
+        //public Location Location { get; set; }
     }
 }

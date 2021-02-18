@@ -1,0 +1,40 @@
+﻿BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [Groups] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    CONSTRAINT [PK_Groups] PRIMARY KEY ([Id])
+);
+GO
+
+CREATE TABLE [Members] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    [GroupId] int NULL,
+    CONSTRAINT [PK_Members] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Members_Groups_GroupId] FOREIGN KEY ([GroupId]) REFERENCES [Groups] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+CREATE INDEX [IX_Members_GroupId] ON [Members] ([GroupId]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200910194835_One', N'6.0.0-alpha.1.20460.2');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+EXEC sp_rename N'[Groups].[Name]', N'GroupName', N'COLUMN';
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200910195234_Two', N'6.0.0-alpha.1.20460.2');
+GO
+
+COMMIT;
