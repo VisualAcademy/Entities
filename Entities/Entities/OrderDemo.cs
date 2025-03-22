@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entities
 {
-    internal class OrderDemo
+    public class OrderDemo
     {
         public int Id { get; set; }
 
